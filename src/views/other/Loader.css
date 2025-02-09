@@ -1,0 +1,27 @@
+.preloader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #282c34; /* Solid background color */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 9999;
+  opacity: 1;
+  transition: opacity 0.5s ease;
+}
+
+.loader {
+  display: flex;
+  flex-direction: column;
+  white-space: nowrap;
+}
+
+.word {
+  font-size: 2rem; /* Adjust font size as needed */
+  color: white; /* Text color */
+  margin: 0.5rem 0; /* Space between words */
+}
