@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 import supabase from "../supabase";
 import userServices from "../services/userServices";
 import Preloader from "../../views/other/Preloader";
@@ -9,7 +9,7 @@ function AuthContext({ children }) {
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
   const [initialLoad, setInitialLoad] = useState(true); // Track initial load
-  let unsub;
+  const unsubRef = useRef(null);
 
   useEffect(() => {
     let timeoutId; // Store timeout ID
@@ -39,7 +39,7 @@ function AuthContext({ children }) {
     };
 
     try {
-      unsub = supabase.auth.onAuthStateChange(handleAuthChange);
+      unsubRef.current = supabase.auth.onAuthStateChange(handleAuthChange);
     } catch (error) {
       console.error("Error in onAuthStateChange:", error);
       setInitialLoad(false); // Ensure loading is eventually set to false even on error
@@ -48,8 +48,8 @@ function AuthContext({ children }) {
     }
 
     return () => {
-      if (typeof unsub === "function") {
-        unsub();
+      if (typeof unsubRef.current === "function") {
+        unsubRef.current();
       }
       clearTimeout(timeoutId); // Clear timeout if component unmounts
     };
