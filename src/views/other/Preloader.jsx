@@ -11,77 +11,73 @@ import gsap from "gsap";
 const Preloader = ({ isLoading, onLoaded }) => {
   const wordList = useMemo(
     () => [
-      // Wrap wordList with useMemo
-      "Hello World", // English
-      "नमस्ते दुनिया", // Hindi
-      "Hola Mundo", // Spanish
-      "Bonjour le monde", // French
-      "Hallo Welt", // German
-      "Ciao mondo", // Italian
-      "こんにちは世界", // Japanese
-      "你好，世界", // Chinese
-      "안녕 세상", // Korean
-      "Olá Mundo", // Portuguese
-      "Привет, мир", // Russian
-      "مرحبا بالعالم", // Arabic
+      "Hello World",
+      "नमस्ते दुनिया",
+      "Hola Mundo",
+      "Bonjour le monde",
+      "Hallo Welt",
+      "Ciao mondo",
+      "こんにちは世界",
+      "你好，世界",
+      "안녕 세상",
+      "Olá Mundo",
+      "Привет, мир",
+      "مرحبا بالعالم",
       "Hello World",
       "नमस्ते दुनिया",
     ],
     []
-  ); // Empty dependency array means it's only created once
+  ); // Empty dependency array means this only runs once
+
+  const animateWords = useCallback(() => {
+    if (!containerRef.current) return; // Guard against null ref
+
+    const containerHeight = containerRef.current.offsetHeight;
+    const wordHeight = 40; // Approximate word height; adjust as needed
+    const totalWordsHeight = wordList.length * wordHeight;
+    const animationDuration = 2; // Adjust duration for speed
+
+    gsap
+      .timeline({ repeat: 0, ease: "none" }) // changed to gsap for its ease in and out functionality
+      .fromTo(
+        containerRef.current,
+        { y: 0 },
+        {
+          y: -totalWordsHeight + wordHeight * 2, // Adjust for top and bottom padding
+          duration: animationDuration,
+          ease: "power1.inOut", // smooth start and end
+          onComplete: () => {
+            setTimeout(() => {
+              gsap.set(containerRef.current, { y: containerHeight }); // Reset position for smooth loop
+              animateWords(); // restart animation
+            }, 500);
+          },
+        }
+      );
+  }, [wordList]); // Add wordList to the dependency array
 
   const containerRef = useRef(null);
   const animation = useAnimation();
   const [animationPlayed, setAnimationPlayed] = useState(false);
 
-  const animateWords = useCallback(() => {
-    const currentContainer = containerRef.current; // Copy the ref value inside the callback
-
-    if (!currentContainer) return;
-
-    const containerHeight = currentContainer.offsetHeight;
-    const wordHeight = 40;
-    const totalWordsHeight = wordList.length * wordHeight;
-    const animationDuration = 2;
-
-    gsap.timeline({ repeat: 0, ease: "none" }).fromTo(
-      currentContainer, // Use the copied ref value
-      { y: 0 },
-      {
-        y: -totalWordsHeight + wordHeight * 2,
-        duration: animationDuration,
-        ease: "power1.inOut",
-        onComplete: () => {
-          setTimeout(() => {
-            gsap.set(currentContainer, { y: containerHeight }); // Use the copied ref value
-            animateWords();
-          }, 500);
-        },
-      }
-    );
-  }, [wordList]);
-
   useEffect(() => {
-    const currentContainer = containerRef.current; // Copy ref value inside useEffect
-
     if (isLoading && !animationPlayed) {
-      setAnimationPlayed(true);
+      setAnimationPlayed(true); // Ensure animation plays only once
       animateWords();
     }
 
     if (!isLoading && animationPlayed) {
-      animation.start({ opacity: 0 });
+      animation.start({ opacity: 0 }); // Fade out
       setTimeout(() => {
-        setAnimationPlayed(false);
-        onLoaded();
-      }, 500);
+        setAnimationPlayed(false); // Reset for next load
+        onLoaded(); // Call the onLoaded callback
+      }, 500); // Match fade-out duration
     }
 
     return () => {
-      animation.stop();
-      if (currentContainer) gsap.killTweensOf(currentContainer); // Use copied ref value and check if it exists
+      animation.stop(); // Stop animation on component unmount
     };
-  }, [isLoading, animation, onLoaded, animationPlayed, animateWords]); // Add animateWords to dependency array
+  }, [isLoading, animation, onLoaded, animationPlayed, animateWords]); // animateWords is now in the dependency array
 
   const generateWords = () => {
     return wordList.map((word, index) => (
