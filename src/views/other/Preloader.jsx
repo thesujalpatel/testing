@@ -12,18 +12,18 @@ const Preloader = ({ isLoading, onLoaded }) => {
   const wordList = useMemo(
     () => [
       // Wrap wordList with useMemo
-      "Hello World",
-      "नमस्ते दुनिया",
-      "Hola Mundo",
-      "Bonjour le monde",
-      "Hallo Welt",
-      "Ciao mondo",
-      "こんにちは世界",
-      "你好，世界",
-      "안녕 세상",
-      "Olá Mundo",
-      "Привет, мир",
-      "مرحبا بالعالم",
+      "Hello World", // English
+      "नमस्ते दुनिया", // Hindi
+      "Hola Mundo", // Spanish
+      "Bonjour le monde", // French
+      "Hallo Welt", // German
+      "Ciao mondo", // Italian
+      "こんにちは世界", // Japanese
+      "你好，世界", // Chinese
+      "안녕 세상", // Korean
+      "Olá Mundo", // Portuguese
+      "Привет, мир", // Russian
+      "مرحبا بالعالم", // Arabic
       "Hello World",
       "नमस्ते दुनिया",
     ],

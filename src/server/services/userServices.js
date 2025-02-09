@@ -1,7 +1,6 @@
 import supabase from "../supabase";
 import { db } from "../firebase";
 import { doc, getDoc, updateDoc, setDoc } from "firebase/firestore";
-import { toast } from "react-toastify";
 
 class UserServices {
   async signUpWithEmailPassword(data) {
