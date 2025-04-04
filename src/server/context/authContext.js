@@ -1,7 +1,7 @@
 import { createContext, useState, useEffect, useRef } from "react";
 import supabase from "../supabase";
 import userServices from "../services/userServices";
-import Preloader from "../../views/other/Preloader";
+import Preloader from "../../views/pages/Preloader";
 
 export const Context = createContext();
 

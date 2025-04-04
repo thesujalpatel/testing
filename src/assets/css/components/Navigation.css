@@ -1,0 +1,33 @@
+.navigation {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: rgba(0, 0, 0, 0.338);
+  width: 100%;
+  position: fixed;
+  z-index: 5;
+}
+.navigation > div {
+  padding: 0 20px;
+}
+
+.navigation_right {
+  display: flex;
+  gap: 20px;
+}
+
+.navigation_divider {
+  width: 2px;
+  background-color: white;
+  border-radius: 2px;
+}
+.navigation_options {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+}
+
+.navigation_option {
+  cursor: pointer;
+}

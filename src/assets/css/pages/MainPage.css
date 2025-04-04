@@ -1,0 +1,12 @@
+.parts {
+  display: grid;
+}
+
+.parts > div {
+  min-height: 100vh;
+  padding-top: 50px;
+}
+
+#home {
+  padding-top: 0;
+}

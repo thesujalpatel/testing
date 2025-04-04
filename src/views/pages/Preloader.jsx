@@ -102,9 +102,9 @@ const Preloader = ({ isLoading, onLoaded }) => {
         position: "fixed",
         top: 0,
         left: 0,
-        width: "100%",
-        height: "100%",
-        backgroundColor: "#f0f0f0", // Solid background
+        width: "100vw",
+        height: "100vh",
+        backgroundColor: "#000000", // Solid background
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
@@ -141,7 +141,7 @@ const Preloader = ({ isLoading, onLoaded }) => {
             width: "100%",
             height: "100%",
             background:
-              "linear-gradient(to bottom, #f0f0f0, rgba(240, 240, 240, 0) 20%, rgba(240, 240, 240, 0) 80%, #f0f0f0)",
+              "linear-gradient(to bottom,rgb(0, 0, 0), rgba(240, 240, 240, 0) 20%, rgba(240, 240, 240, 0) 80%,rgb(0, 0, 0))",
             pointerEvents: "none",
           }}
         />

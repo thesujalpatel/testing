@@ -1,8 +1,8 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ToastContainer, Flip } from "react-toastify";
 
-import Landing from "../views/pages/Landing";
-import Home from "../views/pages/Home";
+import MainPage from "../views/pages/MainPage";
+import Success from "../views/pages/Success";
 import Admin from "../views/admin/Admin";
 import NotFound from "../views/pages/NotFound";
 import Auth from "../views/pages/Auth";
@@ -13,7 +13,7 @@ import AuthAdminGuard from "./context/adminContext";
 
 function Router() {
   const journalRoutes = [
-    { path: "/", element: <Landing /> },
+    { path: "/", element: <MainPage /> },
     {
       path: "/auth",
       element: <Auth />,
@@ -21,8 +21,8 @@ function Router() {
   ];
   const userRoutes = [
     {
-      path: "/home",
-      element: <Home />,
+      path: "/success",
+      element: <Success />,
     },
   ];
   const adminRoutes = [

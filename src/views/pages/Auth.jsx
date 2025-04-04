@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import userServices from "../../server/services/userServices";
+import "../../assets/css/pages/Auth.css";
 import { useNavigate } from "react-router-dom";
 
 function Auth() {
@@ -16,11 +17,11 @@ function Auth() {
 
   const emailAuthSignUp = async () => {
     await userServices.signUpWithEmailPassword(form);
-    navigate("/home");
+    navigate("/success");
   };
   const emailAuthSignIn = async () => {
     await userServices.signInWithEmailPassword(form);
-    navigate("/home");
+    navigate("/success");
   };
 
   return (
@@ -38,7 +39,12 @@ function Auth() {
         onChange={handleChange}
         name="Password"
       />
-      <input type="submit" value="Submit" onClick={emailAuthSignUp} />
+      <input
+        class="button"
+        type="submit"
+        value="Submit"
+        onClick={emailAuthSignUp}
+      />
 
       <h1>Sign In</h1>
       <input
@@ -53,7 +59,21 @@ function Auth() {
         onChange={handleChange}
         name="Password"
       />
-      <input type="submit" value="Submit" onClick={emailAuthSignIn} />
+      <input
+        class="button"
+        type="submit"
+        value="Submit"
+        onClick={emailAuthSignIn}
+      />
+      <br />
+      <br />
+      <br />
+      <input
+        class="button"
+        type="button"
+        value="Go To Home Page"
+        onClick={() => navigate("/")}
+      />
     </div>
   );
 }
