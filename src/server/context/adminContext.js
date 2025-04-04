@@ -13,7 +13,7 @@ function AdminAuthGuard({ children }) {
 
   if (user && user.userRole === "admin") return children;
   else {
-    return <Navigate to="/home" />;
+    return <Navigate to="/" />;
   }
 }
 export default AdminAuthGuard;
